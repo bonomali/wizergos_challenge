@@ -9,6 +9,7 @@ require 'yaml'
 require 'capybara-screenshot/rspec'
 require 'active_support/all'
 require 'yaml'
+require 'time'
 
 Capybara.default_driver = :selenium
 APP_URL="http://drums.dojosto.com"

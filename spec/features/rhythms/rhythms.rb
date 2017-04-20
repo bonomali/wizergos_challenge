@@ -11,6 +11,7 @@ feature 'Wizergos : Drums Dojosto - Rhythm Automation' do
     #handling chrome load issue
     visit home_page.current_url if ENV["JS_DRIVER"] = "selenium-chrome"
     wait_until_visible(home_page.controls)
+    puts "Tap Tap : May the rhythm be with you"
     test_rhythm(home_page,"rhythm_1")
     #rhythm 2
     test_rhythm(home_page,"rhythm_2")
@@ -29,7 +30,7 @@ feature 'Wizergos : Drums Dojosto - Rhythm Automation' do
     # clear default rhythm
     page.controls.clear_button.click
     #change bpm
-    page.execute_script("document.querySelector(\".ng-pristine\").value='#{bpm}';")
+    change_bpm(page,bpm)
     #set kick sequence
     set_beat_sequence(rhythm_sequence["kick"], page.instruments[0].beats)
     #set snare sequence
@@ -39,11 +40,15 @@ feature 'Wizergos : Drums Dojosto - Rhythm Automation' do
     #set Hi-Hat(Open) sequence
     set_beat_sequence(rhythm_sequence["ho"], page.instruments[3].beats)
     # click play button 3 times
+    start_time = Time.now
     playbutton_click_count.times do
       page.controls.play_button.click
     end
-    puts "Play Button Clicked #{playbutton_click_count} times"
-    sleep loop_time
+    puts "\nNow Playing: #{rhythm.capitalize.gsub("_","-")}"
+    puts "Play Button Clicked: #{playbutton_click_count} times"
+    #loop_time
+    loop until timer(start_time, loop_time) <= 0
+    print("\n###################################")
   end
 end
 
