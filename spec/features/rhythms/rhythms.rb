@@ -11,7 +11,7 @@ feature 'Wizergos : Drums Dojosto - Rhythm Automation' do
     #handling chrome load issue
     visit home_page.current_url if ENV["JS_DRIVER"] = "selenium-chrome"
     wait_until_visible(home_page.controls)
-    puts "Tap Tap : May the rhythm be with you"
+    print "Tap Tap : May the rhythm be with you"
     test_rhythm(home_page,"rhythm_1")
     #rhythm 2
     test_rhythm(home_page,"rhythm_2")
